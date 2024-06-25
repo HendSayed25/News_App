@@ -12,9 +12,9 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="pick_your_category_of_interest">Pick Your Category Of Interest</string>
     <string name="sports">sport</string>
-    <string name="politics">politics</string>
+    <string name="technology">technology</string>
     <string name="health">health</string>
     <string name="bussines">bussines</string>
-    <string name="environment">environment</string>
+    <string name="general">general</string>
     <string name="science">science</string>
 </resources>

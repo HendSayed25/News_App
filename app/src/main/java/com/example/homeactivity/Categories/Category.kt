@@ -1,4 +1,4 @@
-package com.example.homeactivity.ui.Home
+package com.example.homeactivity.Categories
 
 data class Category(
     var id:String,

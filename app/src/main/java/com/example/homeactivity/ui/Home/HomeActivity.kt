@@ -1,4 +1,4 @@
-package com.example.homeactivity
+package com.example.homeactivity.ui.Home
 
 import android.os.Bundle
 import android.widget.ImageView
@@ -6,9 +6,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import com.example.homeactivity.ui.Home.CategoriesFragment
-import com.example.homeactivity.ui.Home.Category
-import com.example.homeactivity.ui.Home.SettingFragment
+import com.example.homeactivity.Categories.CategoriesFragment
+import com.example.homeactivity.Categories.Category
+import com.example.homeactivity.Categories.CategoryAdapter
+import com.example.homeactivity.News.NewsFragment
+import com.example.homeactivity.R
 
 class HomeActivity : AppCompatActivity() {
 
@@ -18,6 +20,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var setting_icon:ImageView
     var CategoryFragment= CategoriesFragment()
     var SettingFragment=SettingFragment()
+    var NewsFragment=NewsFragment()
     lateinit var titleOfPage:TextView
 
 
@@ -32,7 +35,6 @@ class HomeActivity : AppCompatActivity() {
         titleOfPage=findViewById(R.id.textOfTitle)
 
 
-
         menuButton.setOnClickListener {
             drawerLayout.open()
 
@@ -40,6 +42,14 @@ class HomeActivity : AppCompatActivity() {
 
         //as default appear the category Fragment when run the program
         pushFragment(CategoryFragment)
+
+        CategoryFragment.onCategoryClick=object:CategoriesFragment.onCategoryClickListner{
+            override fun onItemClick(cat: Category) {
+                pushFragment(NewsFragment.getInstance(cat),true)
+            }
+        }
+
+
         titleOfPage.setText("News App")
 
 
@@ -56,29 +66,17 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-
-     /*   catogriesFragment.onCategoryClick=object: CategoriesFragment.onCategoryClickListner{
-            override fun onItemClick(cat: Category) {
-             //   pushFragment(NewsFragment(),true)
-            }
-
-        }*/
-
-
     }
 
     private fun pushFragment(fragment: Fragment, pushToSatck:Boolean=false){
         //assign this action in variable to determine if push fragment to stack or not then will commit it anywhere
-      /*  val transaction=supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragment)
-        if(pushToSatck){
+        val transaction=supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragment)
+        if(pushToSatck){ //this variable use to when click to back button back to the previous screen
             transaction.addToBackStack("")
         }
         transaction.commit()
-*/
 
+        drawerLayout.close() //when push the fragment the drawable will close
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragment).commit()
     }
-
-
 }

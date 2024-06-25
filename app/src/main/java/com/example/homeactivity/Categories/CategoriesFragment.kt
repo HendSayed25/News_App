@@ -1,4 +1,4 @@
-package com.example.homeactivity.ui.Home
+package com.example.homeactivity.Categories
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,20 +19,20 @@ class CategoriesFragment: Fragment() {
 
     var Category= listOf(
         Category("sport", R.drawable.sport, R.string.sports, R.color.red),
-        Category("politics", R.drawable.politics, R.string.politics, R.color.blue),
+        Category("technology", R.drawable.politics,R.string.technology, R.color.blue),
         Category("health", R.drawable.health, R.string.health, R.color.pink),
         Category("business", R.drawable.bussines, R.string.bussines, R.color.brown_orange),
-        Category("environment", R.drawable.environment, R.string.environment, R.color.baby_blue),
+        Category("general", R.drawable.environment,R.string.general , R.color.baby_blue),
         Category("science", R.drawable.science, R.string.science, R.color.yellow)
         )
 
     lateinit var recyclerView:RecyclerView
-     var recycler_adapter=CategoryAdapter(Category)
+     var recycler_adapter= CategoryAdapter(Category)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView=view.findViewById(R.id.recycler)
+        recyclerView=view.findViewById(R.id.recycler_category)
         recyclerView.adapter=recycler_adapter
 
         recycler_adapter.onItemClickListener=object: CategoryAdapter.onItemClickListner {
@@ -40,15 +40,11 @@ class CategoriesFragment: Fragment() {
                 if(onCategoryClick!=null){
                     onCategoryClick?.onItemClick(item)
                 }
-
             }
-
         }
-
     }
-
     var onCategoryClick: onCategoryClickListner?=null
     interface onCategoryClickListner{
-      fun onItemClick(cat:Category)
+      fun onItemClick(cat: Category)
     }
 }
