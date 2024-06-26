@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    tools:text="News App"
+                    tools:text="@string/NewsApp"
                     android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -43,11 +43,8 @@
                     android:textStyle="bold"
 
                     />
-
                 
             </androidx.constraintlayout.widget.ConstraintLayout>
-            
-            
 
         </androidx.appcompat.widget.Toolbar>
 

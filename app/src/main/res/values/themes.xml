@@ -50,5 +50,12 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
+    <style name="SPINNER" >
+        <item name="android:background">#BCCDDDC7</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">21sp</item>
+
+    </style>
+
 
 </resources>

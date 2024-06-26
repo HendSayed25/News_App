@@ -1,0 +1,26 @@
+
+    <resources>
+        <string name="app_name">HomeActivity</string>
+        <string name="navigation_drawer_open">Open navigation drawer</string>
+        <string name="navigation_drawer_close">Close navigation drawer</string>
+        <string name="nav_header_title">Android Studio</string>
+        <string name="nav_header_subtitle">android.studio@android.com</string>
+        <string name="nav_header_desc">Navigation header</string>
+        <string name="action_settings">الاعدادات</string>
+
+        <string name="NewsApp">الاخبار</string>
+        <string name="category">تصنيفات الاخبار</string>
+        <string name="Language">اللغة</string>
+
+
+        <string name="menu_home">القائمه الرئيسية</string>
+        <string name="menu_gallery">المعرض</string>
+        <string name="menu_slideshow">Slideshow</string>
+        <string name="pick_your_category_of_interest">اختر نوع الاخبار الذى تريده...</string>
+        <string name="sports">الرياضة</string>
+        <string name="technology">التكنولوجيا</string>
+        <string name="health">الصحة</string>
+        <string name="bussines">السياسة</string>
+        <string name="general">عام</string>
+        <string name="science">العلوم</string>
+    </resources>

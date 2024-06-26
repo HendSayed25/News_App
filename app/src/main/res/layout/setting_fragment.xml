@@ -10,12 +10,12 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Language"
+        android:text="@string/Language"
         android:textStyle="bold"
         android:textSize="27sp"
         android:textColor="@color/black"
-        android:padding="5dp"
-        android:layout_margin="15dp"
+        android:padding="3dp"
+        android:layout_margin="40dp"
         />
 
     <Spinner
@@ -23,6 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/Languages"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/SPINNER"
+        android:layout_margin="40dp"
+        android:padding="15dp"
 
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

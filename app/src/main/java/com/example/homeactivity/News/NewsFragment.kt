@@ -56,7 +56,7 @@ class NewsFragment:Fragment() {
         getSources()
     }
     fun getSources(){
-        ApiManager.getApis().getSources(Constants.apiKey).enqueue(object:
+        ApiManager.getApis().getSources(Constants.apiKey,category.id).enqueue(object:
             Callback<SourcesResponse> {
             override fun onResponse(p0: Call<SourcesResponse>, p1: Response<SourcesResponse>) {
                 progressBar.isVisible=false
