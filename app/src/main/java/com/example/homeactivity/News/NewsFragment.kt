@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeactivity.Categories.Category
 import com.example.homeactivity.R
@@ -36,7 +38,15 @@ class NewsFragment:Fragment() {
     lateinit var progressBar: ProgressBar
     lateinit var recycler_view: RecyclerView
     lateinit var category:Category
+    lateinit var viewModel:NewsViewModel
     var adapter= NewsAdapter(null)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel=ViewModelProvider(this).get(NewsViewModel::class.java)
+
+    }
 
 
     override fun onCreateView(
@@ -53,24 +63,28 @@ class NewsFragment:Fragment() {
         progressBar=requireView().findViewById(R.id.progress_bar)
         recycler_view=requireView().findViewById(R.id.recycler_news)
         recycler_view.adapter=adapter
-        getSources()
+
+        viewModel.getSources(category)
+
+        observeLiveData()
     }
-    fun getSources(){
-        ApiManager.getApis().getSources(Constants.apiKey,category.id).enqueue(object:
-            Callback<SourcesResponse> {
-            override fun onResponse(p0: Call<SourcesResponse>, p1: Response<SourcesResponse>) {
-                progressBar.isVisible=false
+    fun observeLiveData(){
 
-                addSourcesToTapLayout(p1.body()?.sources)
-
-                // Log.e("data",p1.body().toString())
-            }
-
-            override fun onFailure(p0: Call<SourcesResponse>, p1: Throwable) {
-                // Log.e("error",p1.localizedMessage)
-            }
-        })
+        viewModel.SourcesLiveData.observe(viewLifecycleOwner) {
+            addSourcesToTapLayout(it)
+        }
+        viewModel.NewsLiveData.observe(viewLifecycleOwner){
+            adapter.changeData(it);
+        }
+        viewModel.progressBar.observe(viewLifecycleOwner){
+            progressBar.isVisible=it
+        }
+        viewModel.messageLiveData.observe(viewLifecycleOwner){
+            Toast.makeText(activity,it,Toast.LENGTH_LONG).show()
+        }
     }
+
+
 
     fun  addSourcesToTapLayout(sources:List<SourcesItem?>?){
 
@@ -84,7 +98,7 @@ class NewsFragment:Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 //this line enable me to get the source of the news of the tab i click to it, when i click to it can view the all news from this source
                 var source=tab?.tag as SourcesItem
-                getNewsBySource(source)
+                viewModel.getNewsBySource(source)
 
             }
 
@@ -94,7 +108,8 @@ class NewsFragment:Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {//when select the tab again
                 //this line enable me to get the source of the news of the tab i click to it, when i click to it can view the all news from this source
                 var source=tab?.tag as SourcesItem
-                getNewsBySource(source)
+                viewModel.getNewsBySource(source)
+
             }
 
         })
@@ -104,25 +119,6 @@ class NewsFragment:Fragment() {
 
     }
 
-    fun getNewsBySource(source: SourcesItem){
 
-        progressBar.isVisible=true
-
-        ApiManager.getApis().getNews(Constants.apiKey,source.id).enqueue(object:
-            Callback<NewsResponse> {
-            override fun onResponse(p0: Call<NewsResponse>, p1: Response<NewsResponse>) {
-
-                progressBar.isVisible=false
-                adapter.changeData(p1.body()?.articles)
-
-            }
-
-            override fun onFailure(p0: Call<NewsResponse>, p1: Throwable) {
-                progressBar.isVisible=false
-            }
-
-        })
-
-    }
 
 }

@@ -59,6 +59,14 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.makeramen:roundedimageview:2.3.0")
 
+    //mvvm
+  //  val lifecycle_version = "2.8.3"
+    // ViewModel
+   // implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+  //  implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
