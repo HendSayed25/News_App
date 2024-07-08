@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeactivity.R
+import com.example.homeactivity.databinding.FragmentCategoriesBinding
 
 class CategoriesFragment: Fragment() {
+
+    lateinit var viewBinding:FragmentCategoriesBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_categories,container,false)
+        viewBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_categories,container,false)
+        return viewBinding.root
     }
 
     var Category= listOf(
@@ -26,14 +31,14 @@ class CategoriesFragment: Fragment() {
         Category("science", R.drawable.science, R.string.science, R.color.yellow)
         )
 
-    lateinit var recyclerView:RecyclerView
+
      var recycler_adapter= CategoryAdapter(Category)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView=view.findViewById(R.id.recycler_category)
-        recyclerView.adapter=recycler_adapter
+
+       viewBinding.recyclerCategory.adapter=recycler_adapter
 
         recycler_adapter.onItemClickListener=object: CategoryAdapter.onItemClickListner {
             override fun onItemClick(pos: Int, item: Category) {

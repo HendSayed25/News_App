@@ -10,14 +10,16 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.homeactivity.R
+import com.example.homeactivity.databinding.SettingFragmentBinding
 import java.util.Locale
 
 class SettingFragment:Fragment() {
 
-    lateinit var spinner:Spinner
     lateinit var adapter_Spinner:ArrayAdapter<String>
+    lateinit var viewBinding:SettingFragmentBinding
     var Languages= arrayOf("English","Arabic")
     var change_Language=true
     override fun onCreateView(
@@ -25,16 +27,16 @@ class SettingFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.setting_fragment,container,false)
+        viewBinding=DataBindingUtil.inflate(inflater,R.layout.setting_fragment,container,false)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        spinner=requireActivity().findViewById(R.id.spinner_language)
-        fillSpinner(spinner)
+        fillSpinner(viewBinding.spinnerLanguage)
 
-        spinner.onItemSelectedListener=object:OnItemSelectedListener{
+        viewBinding.spinnerLanguage.onItemSelectedListener=object:OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,

@@ -1,31 +1,32 @@
 package com.example.homeactivity.Categories
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeactivity.R
-import com.google.android.material.card.MaterialCardView
-
+import com.example.homeactivity.databinding.ItemCategoryBinding
+import com.example.homeactivity.databinding.LeftSideCategoryBinding
 class CategoryAdapter(val category:List<Category>): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-   class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
-       var title:TextView=itemView.findViewById(R.id.text_card)
-       var Image:ImageView=itemView.findViewById(R.id.image_card)
-       var materialCard:MaterialCardView=itemView.findViewById(R.id.material_card)
+   class ViewHolder(val itemBinding:ItemCategoryBinding):RecyclerView.ViewHolder(itemBinding.root){
+      /* fun bind(item:Category?){
+           itemBinding.item=item
+           itemBinding.invalidateAll() //ti check all items is bind
+       }*/
 
+       lateinit var  side_category:LeftSideCategoryBinding
    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var view: View =
-            LayoutInflater.from(parent.context).inflate(
-                if(viewType==LEFT_SIDE)R.layout.left_side_category
-                else R.layout.right_side_category, parent, false)
 
-        return ViewHolder(view)
+        var viewBind:ItemCategoryBinding=DataBindingUtil.inflate(LayoutInflater.from(parent.context),
+            if(viewType==LEFT_SIDE)R.layout.left_side_category
+            else R.layout.right_side_category,
+            parent,false)
+
+        return ViewHolder(viewBind)
     }
 
     val LEFT_SIDE=10
@@ -41,9 +42,12 @@ class CategoryAdapter(val category:List<Category>): RecyclerView.Adapter<Categor
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
          var Cat=category[position]
-         holder.title.setText(Cat.titleId)
-         holder.Image.setImageResource(Cat.imageId)
-         holder.materialCard.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context,Cat.backgroundColor))
+
+        holder.side_category.materialCard.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context,Cat.backgroundColor))
+
+       //  holder.bind(Cat)
+        holder.itemBinding.itemCategory=Cat //Error
+        holder.itemBinding.invalidateAll() //ti check all items is bind
 
          if(onItemClickListener!=null){
              holder.itemView.setOnClickListener{

@@ -13,32 +13,27 @@ import com.example.homeactivity.Categories.Category
 import com.example.homeactivity.Categories.CategoryAdapter
 import com.example.homeactivity.News.NewsFragment
 import com.example.homeactivity.R
+import com.example.homeactivity.databinding.ActivityMainBinding
+import com.example.homeactivity.databinding.AppBarMainBinding
 import java.util.Locale
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var menuButton:ImageView
-    lateinit var drawerLayout:DrawerLayout
-    lateinit var category_icon:ImageView
-    lateinit var setting_icon:ImageView
+
     var CategoryFragment= CategoriesFragment()
     var SettingFragment=SettingFragment()
     var NewsFragment=NewsFragment()
-    lateinit var titleOfPage:TextView
+    lateinit var viewBiniding:ActivityMainBinding
+    lateinit var appBarBinding:AppBarMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        menuButton = findViewById(R.id.menu_button)
-        drawerLayout=findViewById(R.id.drawer_layout)
-        category_icon=findViewById(R.id.categories_icon)
-        setting_icon=findViewById(R.id.setting_icon)
-        titleOfPage=findViewById(R.id.textOfTitle)
 
-        menuButton.setOnClickListener {
-            drawerLayout.open()
+        appBarBinding.menuButton.setOnClickListener {
+            viewBiniding.drawerLayout.open()
 
         }
 
@@ -48,8 +43,8 @@ class HomeActivity : AppCompatActivity() {
 
         //as default appear the category Fragment when run the program
         pushFragment(CategoryFragment)
-        if(LastSelectedLanguage=="en") titleOfPage.setText("News App")
-        else titleOfPage.setText("الاخبار")
+        if(LastSelectedLanguage=="en") viewBiniding.appBarMain.textOfTitle.setText("News App")
+        else viewBiniding.appBarMain.textOfTitle.setText("الاخبار")
 
 
         CategoryFragment.onCategoryClick=object:CategoriesFragment.onCategoryClickListner{
@@ -59,17 +54,17 @@ class HomeActivity : AppCompatActivity() {
         }
 
         //push category fragment in frameLayout
-        category_icon.setOnClickListener {
+        viewBiniding.categoriesIcon.setOnClickListener {
             pushFragment(CategoryFragment)
-            if(LastSelectedLanguage=="en") titleOfPage.setText("News App")
-            else titleOfPage.setText("الاخبار")
+            if(LastSelectedLanguage=="en") viewBiniding.appBarMain.textOfTitle.setText("News App")
+            else viewBiniding.appBarMain.textOfTitle.setText("الاخبار")
         }
 
        //push setting fragment in frameLayout
-        setting_icon.setOnClickListener {
+        viewBiniding.settingIcon.setOnClickListener {
             pushFragment(SettingFragment)
-            if(LastSelectedLanguage=="en")titleOfPage.setText("Settings")
-            else titleOfPage.setText("الاعدادات")
+            if(LastSelectedLanguage=="en")viewBiniding.appBarMain.textOfTitle.setText("Settings")
+            else viewBiniding.appBarMain.textOfTitle.setText("الاعدادات")
         }
 
     }
@@ -82,7 +77,7 @@ class HomeActivity : AppCompatActivity() {
         }
         transaction.commit()
 
-        drawerLayout.close() //when push the fragment the drawable will close
+       viewBiniding.drawerLayout.close() //when push the fragment the drawable will close
 
     }
 

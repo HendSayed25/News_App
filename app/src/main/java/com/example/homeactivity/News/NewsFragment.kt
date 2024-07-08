@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import com.example.homeactivity.api.Constants
 import com.example.homeactivity.api.NewsResponse
 import com.example.homeactivity.api.SourcesItem
 import com.example.homeactivity.api.SourcesResponse
+import com.example.homeactivity.databinding.NewsLayoutBinding
 import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,11 +36,10 @@ class NewsFragment:Fragment() {
 
         }
 
-    lateinit var taplayout: TabLayout
-    lateinit var progressBar: ProgressBar
-    lateinit var recycler_view: RecyclerView
+
     lateinit var category:Category
     lateinit var viewModel:NewsViewModel
+    lateinit var viewBinding:NewsLayoutBinding
     var adapter= NewsAdapter(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,15 +55,14 @@ class NewsFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.news_layout,container,false)
+        viewBinding=DataBindingUtil.inflate(inflater,R.layout.news_layout,container,false)
+        return viewBinding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        taplayout=requireView().findViewById(R.id.tap_layout)
-        progressBar=requireView().findViewById(R.id.progress_bar)
-        recycler_view=requireView().findViewById(R.id.recycler_news)
-        recycler_view.adapter=adapter
+
+        viewBinding.recyclerNews.adapter=adapter
 
         viewModel.getSources(category)
 
@@ -77,7 +77,7 @@ class NewsFragment:Fragment() {
             adapter.changeData(it);
         }
         viewModel.progressBar.observe(viewLifecycleOwner){
-            progressBar.isVisible=it
+            viewBinding.progressBar.isVisible=it
         }
         viewModel.messageLiveData.observe(viewLifecycleOwner){
             Toast.makeText(activity,it,Toast.LENGTH_LONG).show()
@@ -89,12 +89,12 @@ class NewsFragment:Fragment() {
     fun  addSourcesToTapLayout(sources:List<SourcesItem?>?){
 
         sources!!.forEach {
-            val tab=taplayout.newTab()
+            val tab=viewBinding.tapLayout.newTab()
             tab.setText(it!!.name)
             tab.tag=it //tag is pointer refer to the tab's data
-            taplayout.addTab(tab)
+            viewBinding.tapLayout.addTab(tab)
         }
-        taplayout.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
+        viewBinding.tapLayout.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 //this line enable me to get the source of the news of the tab i click to it, when i click to it can view the all news from this source
                 var source=tab?.tag as SourcesItem
@@ -115,7 +115,7 @@ class NewsFragment:Fragment() {
         })
 
         //to appear default data when i not click to specific tab
-        taplayout.getTabAt(0)?.select()
+        viewBinding.tapLayout.getTabAt(0)?.select()
 
     }
 

@@ -1,67 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ProgressBar
-        android:id="@+id/progress_bar_of_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/image"
-        app:layout_constraintBottom_toBottomOf="@id/image"/>
+    <data>
+        <variable
+            name="itemOfNews"
+            type="com.example.homeactivity.api.ArticlesItem" />
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/image"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="190dp"
-        tools:src="@drawable/science"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_corner_radius="12dp"
-        android:scaleType="centerCrop"
-        android:padding="5dp"
-        />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/image"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="author"
-        android:textSize="18sp"
-        android:textColor="@color/gray"
-        android:padding="5dp"
+        <ProgressBar
+            android:id="@+id/progress_bar_of_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image"
+            app:layout_constraintBottom_toBottomOf="@id/image" />
 
-        />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            tools:src="@drawable/science"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="12dp"
+            android:scaleType="centerCrop"
+            android:padding="5dp"
+            imageUrl="@{itemOfNews.urlToImage}"/>
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/author"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="lakfakljfskaj"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:padding="5dp"
 
-        />
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{itemOfNews.author}"
+            android:textSize="18sp"
+            android:textColor="@color/gray"
+            android:padding="5dp"
 
-    <TextView
-        android:id="@+id/date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="date"
-        android:textSize="18sp"
-        android:textColor="@color/gray"
-        android:padding="5dp"
+            />
 
-        />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/author"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{itemOfNews.title}"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:padding="5dp"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            />
+
+        <TextView
+            android:id="@+id/date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{itemOfNews.publishedAt}"
+            android:textSize="18sp"
+            android:textColor="@color/gray"
+            android:padding="5dp"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
