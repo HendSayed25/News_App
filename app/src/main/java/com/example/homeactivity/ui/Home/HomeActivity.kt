@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.homeactivity.Categories.CategoriesFragment
+import com.example.homeactivity.Categories.Category
 import com.example.homeactivity.News.NewsFragment
 import com.example.homeactivity.R
 import com.example.homeactivity.databinding.ActivityMainBinding

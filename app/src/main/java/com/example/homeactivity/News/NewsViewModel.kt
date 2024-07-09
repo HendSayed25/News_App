@@ -2,6 +2,7 @@ package com.example.homeactivity.News
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.homeactivity.Categories.Category
 import com.example.homeactivity.api.ApiManager
 import com.example.homeactivity.api.ArticlesItem
 import com.example.homeactivity.api.Constants
@@ -19,7 +20,7 @@ class NewsViewModel:ViewModel() {
     val progressBar=MutableLiveData<Boolean>()
     val messageLiveData=MutableLiveData<String>()//if happen any failure
 
-    fun getSources(category:Category){
+    fun getSources(category: Category){
         ApiManager.getApis().getSources(Constants.apiKey,category.id).enqueue(object:
             Callback<SourcesResponse> {
             override fun onResponse(p0: Call<SourcesResponse>, p1: Response<SourcesResponse>) {

@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.homeactivity.Categories.Category
 import com.example.homeactivity.R
 import com.example.homeactivity.api.SourcesItem
 import com.example.homeactivity.databinding.NewsLayoutBinding
