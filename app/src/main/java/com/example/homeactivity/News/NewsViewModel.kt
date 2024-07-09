@@ -1,9 +1,7 @@
 package com.example.homeactivity.News
 
-import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.homeactivity.Categories.Category
 import com.example.homeactivity.api.ApiManager
 import com.example.homeactivity.api.ArticlesItem
 import com.example.homeactivity.api.Constants

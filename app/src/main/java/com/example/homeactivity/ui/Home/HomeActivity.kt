@@ -3,14 +3,9 @@ package com.example.homeactivity.ui.Home
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.homeactivity.Categories.CategoriesFragment
-import com.example.homeactivity.Categories.Category
-import com.example.homeactivity.Categories.CategoryAdapter
 import com.example.homeactivity.News.NewsFragment
 import com.example.homeactivity.R
 import com.example.homeactivity.databinding.ActivityMainBinding

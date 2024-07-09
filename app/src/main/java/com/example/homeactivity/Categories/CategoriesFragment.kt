@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.homeactivity.R
 import com.example.homeactivity.databinding.FragmentCategoriesBinding
 
@@ -22,7 +21,7 @@ class CategoriesFragment: Fragment() {
         return viewBinding.root
     }
 
-    var Category= listOf(
+    var categortList= listOf(
         Category("sport", R.drawable.sport, R.string.sports, R.color.red),
         Category("technology", R.drawable.politics,R.string.technology, R.color.blue),
         Category("health", R.drawable.health, R.string.health, R.color.pink),
@@ -32,7 +31,7 @@ class CategoriesFragment: Fragment() {
         )
 
 
-     var recycler_adapter= CategoryAdapter(Category)
+     var recycler_adapter= CategoryAdapter(categortList)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

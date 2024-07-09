@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homeactivity.R
 import com.example.homeactivity.databinding.ItemCategoryBinding
 import com.example.homeactivity.databinding.LeftSideCategoryBinding
-class CategoryAdapter(val category:List<Category>): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+class CategoryAdapter(val category:List<Category?>?): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
    class ViewHolder(val itemBinding:ItemCategoryBinding):RecyclerView.ViewHolder(itemBinding.root){
-      /* fun bind(item:Category?){
-           itemBinding.item=item
-           itemBinding.invalidateAll() //ti check all items is bind
-       }*/
+       fun bind(item:Category?){
+            itemBinding.itemCategory=item
+            itemBinding.invalidateAll() //ti check all items is bind
+       }
 
        lateinit var  side_category:LeftSideCategoryBinding
    }
@@ -37,17 +37,15 @@ class CategoryAdapter(val category:List<Category>): RecyclerView.Adapter<Categor
     }
 
     override fun getItemCount(): Int {
-        return category.size
+        return category!!.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-         var Cat=category[position]
+         var Cat=category?.get(position)
 
-        holder.side_category.materialCard.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context,Cat.backgroundColor))
+        holder.side_category.materialCard.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context,Cat!!.backgroundColor))
 
-       //  holder.bind(Cat)
-        holder.itemBinding.itemCategory=Cat //Error
-        holder.itemBinding.invalidateAll() //ti check all items is bind
+         holder.bind(Cat!!)
 
          if(onItemClickListener!=null){
              holder.itemView.setOnClickListener{
